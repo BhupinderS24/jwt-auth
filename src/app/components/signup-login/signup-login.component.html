@@ -1,0 +1,108 @@
+<div class="container">
+  <mat-card class="card text-light bg-dark row">
+    <div class="col-sm-5 sideImage"> 
+    </div>
+    <div  *ngIf="route==='signup'" class="col-sm-7 form ">
+      <mat-card class="form-box">
+        <form [formGroup]="signupForm" (ngSubmit)="submitSignup()"> 
+          <div class="form-group"  [ngClass]="{'has-error':signupForm.get('username').errors && 
+        (signupForm.get('username').touched || signupForm.get('username').dirty)}">
+            <input type="text" class="input form-control" formControlName="username"    placeholder="username" /> 
+            <span style="height:10px; font-size: 0px;" *ngIf="signupForm.get('username').errors && (signupForm.get('username').touched || signupForm.get('username').dirty||isInvalid)">
+              <span class="errorMessage" *ngIf="signupForm.get('username').errors.required">username is required</span>
+              <span class="errorMessage" *ngIf="signupForm.get('username').errors.maxlength">username length must be greater than 30</span>
+            </span>
+           
+          </div>
+
+          <div  class="form-group" [ngClass]="{'has-error':signupForm.get('email').errors && 
+          (signupForm.get('email').touched || signupForm.get('email').dirty)}">
+            <input type="email" pattern ="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" class="input form-control" formControlName="email" placeholder="email" >
+            <span style="height:10px; font-size: 0px;" *ngIf="signupForm.get('email').errors && (signupForm.get('email').touched || signupForm.get('email').dirty || isInvalid)">
+              <span class="errorMessage" *ngIf="signupForm.get('email').errors.required">email is required</span>
+              <span class="errorMessage" *ngIf="signupForm.get('email').errors.pattern">invalid email (eg- abc@xy.com)</span>
+            </span>
+          </div>
+    
+          <div class="form-group" [ngClass]="{'has-error':signupForm.get('country').errors && 
+          (signupForm.get('country').touched || signupForm.get('country').dirty)}">
+            <select formControlName="country" class="input form-control" placeholder="country" name="country">
+              <option value="" disabled selected >Country</option>
+              <option value="australia">Australia</option>
+              <option value="canada">Canada</option>
+              <option value="usa">USA</option>
+              <option value="india">India</option>
+            </select>
+            <span style="height:10px; font-size: 0px;" *ngIf="signupForm.get('country').errors && 
+            (signupForm.get('country').touched || signupForm.get('country').dirty || isInvalid)">
+              <span class="errorMessage" *ngIf="signupForm.get('country').errors.required">country is required</span>
+            </span>
+          </div>
+
+          <div class="form-group " [ngClass]="{'has-error':signupForm.get('age').errors && 
+          (signupForm.get('age').touched || signupForm.get('age').dirty)}">  
+            <input type="number" formControlName="age" class="input form-control" placeholder="age">
+            <span style="height:10px; font-size: 0px;" *ngIf="signupForm.get('age').errors && 
+            (signupForm.get('age').touched || signupForm.get('age').dirty || isInvalid)">
+              <span class="errorMessage" *ngIf="signupForm.get('age').errors.required">age is required</span>
+            </span>
+          </div>
+
+          <div class="form-group " [ngClass]="{'has-error':signupForm.get('password').errors && 
+          (signupForm.get('password').touched || signupForm.get('password').dirty)}">  
+            <input type="password" formControlName="password" class="input form-control" placeholder ="password" >
+            <span style="height:10px; font-size: 0px;" *ngIf="signupForm.get('password').errors && 
+            (signupForm.get('password').touched || signupForm.get('password').dirty  || isInvalid)">
+              <span class="errorMessage" *ngIf="signupForm.get('password').errors.required">password is required</span>
+            </span>
+          </div>
+    
+          <div >
+            <button (click)="addUser()" class="generateButton" style="cursor:pointer" id="button">SIGNUP</button>
+          </div> 
+        </form>
+      </mat-card>
+
+      <div class="bottom">
+        <span style="margin-bottom: 5px;">already have an account?</span>
+        <button (click)="routeToLogin()" class="loginButton"><b>LOGIN</b></button>
+      </div>
+    </div>
+
+
+    <div *ngIf="route==='login'" class="col-sm-7 form-login">
+      <mat-card class="form-box-login">
+        <form [formGroup]="loginForm" (ngSubmit)="submitLogin()"> 
+          <div  class="form-group" id="length" [ngClass]="{'has-error':loginForm.get('username').errors && 
+          (loginForm.get('username').touched || loginForm.get('username').dirty)}">
+            <input formControlName="username" class="input form-control"  placeholder="username" /> 
+            <span style="height:10px; font-size: 0px;" *ngIf="loginForm.get('username').errors && (loginForm.get('username').touched || loginForm.get('username').dirty||isLoginInvalid)">
+              <span class="errorMessage" *ngIf="loginForm.get('username').errors.required">username is required</span>
+              <span class="errorMessage" *ngIf="loginForm.get('username').errors.maxlength">username length must be greater than 30</span>
+            </span>
+          </div>
+    
+          <div class="form-group " [ngClass]="{'has-error':loginForm.get('password').errors && 
+          (loginForm.get('password').touched || loginForm.get('password').dirty)}">
+            <input  formControlName="password" class="input form-control" type="password" placeholder ="password" >
+            <span style="height:10px; font-size: 0px;" *ngIf="loginForm.get('password').errors && 
+            (loginForm.get('password').touched || loginForm.get('password').dirty  || isLoginInvalid)">
+              <span class="errorMessage" *ngIf="loginForm.get('password').errors.required">password is required</span>
+            </span>
+          </div>
+     
+          <div >
+            <button (click)="login()" class="generateButton" style="cursor:pointer" id="button">LOGIN</button>
+          </div> 
+        </form>
+      </mat-card>
+
+      <div class="bottom">
+        <span style="margin-bottom: 5px;">Don't have an account yet?</span>
+        <button (click)="routeToSignup()" class="loginButton"><b>SIGNUP</b></button>
+      </div>
+    </div>
+  </mat-card>
+</div>
+
+
