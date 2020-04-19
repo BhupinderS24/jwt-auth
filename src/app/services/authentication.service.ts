@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -22,8 +22,15 @@ export class AuthenticationService {
 
   login(userCred:any){
     const headers = new HttpHeaders();
+    const requestOptions = {
+      headers: new HttpHeaders({
+       'Content-Type': "application/json; charset=utf-8"
+      }),
+      withCredentials: true
+     };
+   
     headers.set('Content-Type', 'application/json; charset=utf-8');
     const addUserUrl=this.url+'/login';
-    return this.http.post(addUserUrl,userCred,{headers:headers});
+    return this.http.post(addUserUrl,userCred,requestOptions);
   }
 }
