@@ -26,7 +26,7 @@ export class AuthenticationService {
       headers: new HttpHeaders({
        'Content-Type': "application/json; charset=utf-8"
       }),
-      withCredentials: true
+      credentials:'include'
      };
    
     headers.set('Content-Type', 'application/json; charset=utf-8');
