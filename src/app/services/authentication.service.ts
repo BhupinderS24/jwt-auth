@@ -24,9 +24,9 @@ export class AuthenticationService {
     const headers = new HttpHeaders();
     const requestOptions = {
       headers: new HttpHeaders({
-       'Content-Type': "application/json; charset=utf-8"
-      }),
-      credentials:'include'
+       'Content-Type': "application/json; charset=utf-8",
+       'Access-Control-Allow-Credentials':'true'
+      })
      };
    
     headers.set('Content-Type', 'application/json; charset=utf-8');
