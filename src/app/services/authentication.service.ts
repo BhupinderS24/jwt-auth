@@ -21,16 +21,20 @@ export class AuthenticationService {
   }
 
   login(userCred:any){
-    const headers = new HttpHeaders();
-    const requestOptions = {
-      headers: new HttpHeaders({
-       'Content-Type': "application/json; charset=utf-8",
-       'Access-Control-Allow-Credentials':'true'
-      })
-     };
+  
+     const headers=new Headers();
+     headers.append('Content-Type', 'application/json; charset=utf-8');
    
-    headers.set('Content-Type', 'application/json; charset=utf-8');
+     headers.append('Accept', 'application/json');
+    //  headers.append('Access-Control-Request-Origin','*');
+    
+    
     const addUserUrl=this.url+'/login';
-    return this.http.post(addUserUrl,userCred,requestOptions);
+    return fetch(addUserUrl,{
+      method:'POST',
+      credentials:'include',
+      headers:headers,
+      body:JSON.stringify(userCred)
+    })
   }
 }

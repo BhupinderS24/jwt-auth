@@ -95,8 +95,10 @@ export class SignupLoginComponent implements OnInit {
   }
 
   login(){
-    this.authService.login(this.loginForm.value).subscribe((data:any)=>{
+    this.authService.login(this.loginForm.value).then((data:any)=>{
       console.log("Success");
+ }).catch(err=>{
+   console.log(err);
  });
   }
 }

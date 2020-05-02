@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  authUrl:'https://cryptic-caverns-52810.herokuapp.com/chatcord/'
+  authUrl:'http://localhost:3000/chatcord/'
 };
 /*
  * For easier debugging in development mode, you can import the following file
