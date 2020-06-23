@@ -12,6 +12,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 export class SignupLoginComponent implements OnInit {
   route;
   signupForm:FormGroup;
+  formSubmitted=false;
   loginForm:FormGroup;
   submitted=false;
   isInvalid=false;
@@ -69,6 +70,7 @@ export class SignupLoginComponent implements OnInit {
     else{
       this.isInvalid=false;
     }
+    this.formSubmitted = true;
     console.log(this.signupForm);
     // if(this.signupForm.value.username===''){
       
